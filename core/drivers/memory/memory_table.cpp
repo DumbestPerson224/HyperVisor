@@ -1,3 +1,4 @@
+#include <cstddef>
 typedef struct {
     size_t size;
     void* block;
@@ -16,7 +17,7 @@ void deallocate(){
   table* t = nullptr;
   t = new table;
   if(t->block != nullptr){
-     delete t->block;
+     delete &t->block;
      t->size = 0;
   }
   t = nullptr;
