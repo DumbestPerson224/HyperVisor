@@ -6,7 +6,6 @@ typedef struct {
 void allocate(size_t size){
   table* t = nullptr;
   t = new table;
-  t->size = NULL;
   t->size = size;
   t->block = nullptr;
   t->block = new t->size;
