@@ -11,8 +11,10 @@ struct Table* table_ptr = NULL;
 void allocate_block(size_t size){
     if(table_ptr == NULL){
         table_ptr = malloc(sizeof(struct Table));
-        table_ptr->size = size;
-        table_ptr->block = malloc(table_ptr->size);
+        if(table_ptr != NULL){
+            table_ptr->size = size;
+            table_ptr->block = malloc(table_ptr->size);
+        }
     }
 }
 
