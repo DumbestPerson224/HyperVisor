@@ -15,10 +15,12 @@ void init_table(int size){
 }
 
 void destroy_table(){
-    t->size = 0;
-    free(t->block); 
-    block_deallocated = true;
-    free(t);
+    if(block_deallocated == false){
+        t->size = 0;
+        free(t->block); 
+        block_deallocated = true;
+        free(t);
+    }
 }
 
 void write_to_block(void* block, int size){
@@ -34,4 +36,3 @@ void read_from_block(void* block_ptr, int size){
         size = t->size;
     }
 }
-
