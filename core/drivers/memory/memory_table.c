@@ -1,38 +1,39 @@
 #include <stdlib.h>
-#include <stdbool.h>
-struct table{
+#include <stddef.h>
+#include <string.h>
+struct Table{
+    size_t size;
     void* block;
-    int size;
 };
 
-bool block_deallocated = false;
-struct table* t;
-void init_table(int size){
-    t = malloc(size);
-    t->block = malloc(size);
-    t->size = size;
-    block_deallocated = false;
-}
+struct Table* table_ptr = NULL;
 
-void destroy_table(){
-    if(block_deallocated == false){
-        t->size = 0;
-        free(t->block); 
-        block_deallocated = true;
-        free(t);
+void allocate_block(size_t size){
+    if(table_ptr == NULL){
+        table_ptr = malloc(sizeof(struct Table));
+        table_ptr->size = size;
+        table_ptr->block = malloc(table_ptr->size);
     }
 }
 
-void write_to_block(void* block, int size){
-    if(block_deallocated == false){
-        t->block = block;
-        t->size  = size;
+void deallocate_block(){
+    if(table_ptr != NULL){
+        table_ptr->size = 0;
+        free(table_ptr->block);
+        free(table_ptr);        
+        table_ptr = NULL;
+    };
+}
+
+void write_to_block(void* object, size_t size){
+    if(table_ptr != NULL){
+        table_ptr->size = size;
+        memmove(table_ptr->block, object, size);
     }
 }
 
-void read_from_block(void* block_ptr, int size){
-    if(block_deallocated == false){
-        block_ptr = t->block;
-        size = t->size;
+void read_block(void* block_ptr, size_t size){
+    if(block_ptr != NULL && table_ptr != NULL){
+        memcpy(table_ptr->block, block_ptr, size);
     }
 }
