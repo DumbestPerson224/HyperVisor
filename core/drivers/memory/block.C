@@ -36,6 +36,8 @@ void write_to_block(void* object, size_t size){
 
 void read_block(void* block_ptr, size_t size){
     if(block_ptr != NULL && table_ptr != NULL){
-        memcpy(block_ptr, table_ptr->block, size);
+        if(size <= table_ptr->size){
+           memcpy(block_ptr, table_ptr->block, size);
+        }
     }
 }
