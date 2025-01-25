@@ -29,8 +29,9 @@ void deallocate_block(){
 
 void write_to_block(void* object, size_t size){
     if(table_ptr != NULL){
-        table_ptr->size = size;
-        memmove(table_ptr->block, object, size);
+        if(table_ptr->size <= size){
+            memmove(table_ptr->block, object, size);
+        }
     }
 }
 
