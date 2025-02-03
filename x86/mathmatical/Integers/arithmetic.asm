@@ -1,49 +1,80 @@
+;int addition(int a, int b){
+;    return a + b;
+;}
+;
+;int subtraction(int a, int b){
+;    a = a - b;
+;    return;
+;}
+;
+;int multiply(int a, int b){
+;    a = a * b;
+;    return;
+;}
+;
+;int divide(int a, int b){
+;    if(b != 0){
+;        a = a / b;
+;    };
+;    return;
+;}
+
 section .text 
     global addition
     global subtraction
     global multiply
-    global _divide
+    global division
 
-%macro setup_stack 0 
-  push ebp 
-  mov ebp, esp
+%macro setup 0
+    ; Setup the stack frame
+    push ebp     ; Save the original base pointer
+    mov ebp, esp ; Set the new base pointer
 %endmacro 
 
-%macro destroy_stack 0 
- mov esp, ebp
- pop ebp
- ret 
+%macro load 0
+  ; Get the return address and save it
+  lea eax, [ebp + 4]
+  push eax 
+
+  ; Get the parameters
+  mov eax, dword [ebp + 8]
+  mov edx, dword [ebp + 12]
+
 %endmacro
 
+
+%macro destroy 0
+  ; Destroy the stack frame
+  pop eax  ; Get the return address
+  pop ebp 
+  mov ebp, esp 
+  ret 
+%endmacro 
+
+
+%macro store 0
+  mov [ebp + 8], eax 
+%endmacro 
+
 addition:
-    setup_stack
-    lea eax, [ebp + 4]
-    lea ebx, [ebp + 8]
-    add eax, dword [ebx]
-    destroy_stack 
+    load 
+    add eax, edx 
+    store  
+    destroy 
 
-subtraction:
-    setup_stack
-    lea eax, [ebp + 4]
-    lea edx, [ebp + 8]
-    sub eax, dword [ebx]
-    destroy_stack 
+division:
+    setup 
+    load 
 
-multiply:
-    setup_stack
-    lea eax, [ebp + 4]
-    lea ebx, [ebp + 8]
-    mul dword [ebx]
-    destroy_stack
+    test edx, edx 
+    jz not_divide
+    div edx 
+    store 
+    destroy 
 
-divide:
-    setup_stack
-    lea eax, [ebp + 4]
-    lea ebx, [ebp + 8]
-    cmp dword [eax], 0 
-    jnz not_division_by_zero
-    destroy_stack
-    
-not_division_by_zero:
-    div dword [ebx]
-    destroy_stack
+not_divide:
+    destroy
+
+; ebp + 4 = Return address
+; ebp + 8 = Parameter 1
+; ebp + 12 = Parameter 2
