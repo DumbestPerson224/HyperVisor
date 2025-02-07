@@ -1,3 +1,32 @@
+/*
+section .data
+   VMManager:
+     dd 0
+     dd 0
+     
+  set_process:
+     push ebp
+     mov ebp, esp
+     lea eax, [ebp + 8]
+     lea edx, [ebp + 12]
+     mov dword [vmManager], dword [eax]
+     mov [vmManager + 4], [edx]
+     pop ebp
+     mov ebp, esp
+     ret
+
+clear_process:
+   mov dword [vmManager], 0
+
+write_to_process:
+   push ebp
+   mov ebp, esp
+   lea eax, [ebp + 8]
+   mov dword [vmManager], dword [eax]
+   pop ebp 
+   mov ebp, esp
+   ret
+*/
 struct VMManager {
 	int proc_id = 0;
 	int* proc_address = nullptr;
