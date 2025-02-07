@@ -76,6 +76,7 @@ division:
     setup 
     load 
 
+    ; Check for a division by zero
     test edx, edx 
     jz not_divide
     div edx 
