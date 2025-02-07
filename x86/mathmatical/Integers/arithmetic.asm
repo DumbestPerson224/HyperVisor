@@ -1,3 +1,13 @@
+; (C) 2024 - DumbestPerson224
+; File: arithmetic.asm
+; Project Name: HyperVisor
+; Location: https://githu.com/DumbestPerson224/HyperVisor/x86/mathmatical/Integers/arithmetic.asm
+
+;Permissions:
+;    1. Edit
+;    2. Copy
+;    3. Use
+
 ;int addition(int a, int b){
 ;    return a + b;
 ;}
