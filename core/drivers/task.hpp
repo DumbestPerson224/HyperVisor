@@ -11,18 +11,22 @@ section .data
      lea edx, [ebp + 12]
      mov dword [vmManager], dword [eax]
      mov [vmManager + 4], [edx]
+     lea eax, [ebp + 4]
+     push eax
      pop ebp
      mov ebp, esp
      ret
 
 clear_process:
    mov dword [vmManager], 0
-
+   
 write_to_process:
    push ebp
    mov ebp, esp
    lea eax, [ebp + 8]
    mov dword [vmManager], dword [eax]
+   lea eax, [ebp + 4]
+   push eax
    pop ebp 
    mov ebp, esp
    ret
