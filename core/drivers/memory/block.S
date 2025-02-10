@@ -4,8 +4,10 @@ section .data
 
 section .text
   global _write_to_block
-  
-_write_to_block:
+  global write_to_block
+  global read_block
+
+write_to_block:
   push ebp
   mov ebp, esp
   lea eax, [ebp + 8]
@@ -15,7 +17,7 @@ _write_to_block:
   pop ebp
   ret 
   
-write_to_block:
+_write_to_block:
   mov [eax], [edx]
   pop ebp 
   ret 
