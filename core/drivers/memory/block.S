@@ -13,7 +13,7 @@ write_to_block:
   lea eax, [ebp + 8]
   lea edx, [ebp + 12]
   cmp dword [eax], dword [edx]
-  jle write_to_block
+  jle _write_to_block
   pop ebp
   ret 
   
