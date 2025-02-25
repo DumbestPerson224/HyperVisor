@@ -1,19 +1,34 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>HyperVisor</title>
+        <title>OnlineHyper</title>
+        <meta name="description" title="Free and open source virtualization software">
+        <meta name="description" title="virtualization software with parental controls">
+        <meta name="description" title="Online hyper visor">
+        <script src="script.js"></script>
+        <link rel="stylesheet" href="styles.css"/>
     </head>
     <body>
         <nav class="navbar">
             <div class="navbar-header">
                 <div class="navbar-header-title">
-                    <h1>HyperVisor</h1>
+                    <h1>OnlineHyper</h1>
+                    <noscript>This website requires JavaScript to properly work.</noscript>
                 </div>
             </div>
             <div class="navbar-links">
-                <ul>
-                    <li><a href="https://github.com/DumbestPerson224/HyperVisor">Source code</a></li>
-                </ul>
+                <div class="navbar-links-header">
+                    <h2>Links</h2>
+                </div>
+                <div class="navbar-links-links">
+                    <ul>
+                        <li><a href="https://github.com/DumbestPerson224/HyperVisor">Source code</a></li>
+                        <li><a href="#about">About</a></li>
+                        <li><a href="#privacy">Privacy policy</a></li>
+                        <li><a href="#parental">Parental controls</a></li>
+                        <li><a href="#auto">Auto update</a></li>
+                    </ul>
+                </div>
             </div>
         </nav>
         <div class="main-content">
@@ -31,24 +46,21 @@
                 </div>
                 <div class="main-content-privacy-policy-paragraph">
                     <p>This platform collects data such as Virtual Machine errors, accounts and Virtual Machine settings.</p>
-                    <p>This platform will never collect personal information such as names, emails (except for parental controls, passwords, etc</p>
+                    <p>This platform will never collect personal information such as names, emails except for parental controls, passwords, etc</p>
                     <p>Virtual machine settings saved include:</p>
                     <ul>
                         <li>Wifi related stuff</li>
                         <li>Boot configuration</li>
                         <li>OS installed</li>
-                        <li>Disk space</li>
+                       <li>Disk space</li>
                         <li>Partitioning</li>
                         <li>Memory settings</li>
                     </ul>
                 </div>
-                <div class="main-content-privacy-policy-form">
+                <div class="main-content-privacy-policy-opt-section">
                     <form action="policy.php">
-                        <!-- This image here is for dyslexic people -->
-                        <a href="policy.php"><img src="opt_in.png" alt="Click me to opt in"></a> 
-                        <input type="checkbox" value="Opt in to data collection"/>
-                        <input type="checkbox" value="Opt out to data collection (This will only use data needed for functioning)"/>
-                        <input type="submit"/>
+                        <p><a href="javscript:optIn();">Opt in for data collection</a></p>
+                        <input type="button" value="Opt out of data collection"/>
                     </form>
                 </div>
             </div>
@@ -56,28 +68,41 @@
                 <div class="main-content-parental-controls-header">
                     <h2>Parental Controls data collection</h2>
                 </div>
-                <div class="main-controls-parental-controls-paragraph">
+                <div class="main-content-parental-controls-paragraph">
                     <p>This will send all data to a parent's email once sent all unessential data is deleted from the server</p>
                     <p>With this a parent can:</p>
                     <ul>
                         <li>Track search history</li>
                         <li>Apply custom restrictions and passwords</li>
                         <li>Get everything a child is doing</li>
+                        <li>Restrict apps</li>
                     </ul>
                 </div>
+                <div class="main-content-parental-controls-form">
+                    <form action="parental.php">
+                        <input type="submit" value="Turn on parental controls"/>
+                        <input type="submit" value="Turn off parental controls"/>
+                    </form>
+                </div>
             </div>
-            <div class="main-content-auto-update">
+            <div class="main-content-auto-update" id="auto_update_form">
                 <div class="main-content-auto-update-header">
                     <h2>Auto update</h2>
                 </div>
                 <div class="main-content-auto-update-paragraph">
                     <p>Choose whether or not this app can auto update or not</p>
                 </div>
-                <div class="main-content-auto-update-form">
-                    <form action="autoupdate.php">
-                        <input type="checkbox" value="Allow auto updating"/>
-                        <input type="checkbox" value="Don't allow auto updating"/>
-                    </form>
+                <div class="main-content-auto-update-options">
+                    <button onclick="auto_update_on()">Turn on auto update</button>
+                    <button onclick="auto_update_off()">Turn off auto update</button>
+                </div>
+            </div>
+            <div class="main-content-copyright">
+                <div class="main-content-copyright-header">
+                    <h2>Copyright</h2>
+                </div>
+                <div class="main-content-copyright-paragraph">
+                    <p>&copy;<a href="https://github.com/DumbestPerson224">DumbestPerson224</a> - 2024</p>
                 </div>
             </div>
         </div>
